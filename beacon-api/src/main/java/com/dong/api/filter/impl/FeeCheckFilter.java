@@ -1,0 +1,21 @@
+package com.dong.api.filter.impl;
+
+import com.dong.api.filter.CheckFilter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+/**
+ * 类描述：客户剩余的金额是否充足的检验具体类
+ *
+ * @author wuyadong
+ * @date 2025/4/5 下午10:51
+ */
+@Component("fee")
+@Slf4j
+public class FeeCheckFilter implements CheckFilter {
+
+    @Override
+    public void check(Object obj) {
+        log.info("---->客户剩余的金额是否充足校验");
+    }
+}

@@ -1,0 +1,15 @@
+spring:
+  application:
+    # 服务名称
+    name: beacon-api
+  profiles:
+    # 开发环境
+    active: dev
+  cloud:
+    nacos:
+       # Nacos 配置中心
+      config:
+        server-addr: 192.168.183.130:8848
+        file-extension: yml
+
+
