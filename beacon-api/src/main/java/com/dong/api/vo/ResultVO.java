@@ -21,6 +21,11 @@ public class ResultVO {
     private String msg;
 
     /**
+     * 响应详细信息
+     */
+    private Object data;
+
+    /**
      * 短信的计费条数（70个字一条，超出70个字，按照67个字一条发送）
      */
     private Integer count;
