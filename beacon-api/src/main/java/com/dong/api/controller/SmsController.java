@@ -6,6 +6,8 @@ import com.dong.api.vo.ResultVO;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +25,13 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@RefreshScope
 @RequestMapping("/sms")
 public class SmsController {
+
+
+    @Value("${headers}")
+    private String headers;
 
 
     @PostMapping(value = "/single_send", produces = "application/json;charset=utf-8")
@@ -40,6 +47,35 @@ public class SmsController {
      * @return
      */
     private String getRealIP(HttpServletRequest request) {
+
+        // 将动态配置中的头部信息进行拆分，并过滤掉空格和空串
+        List<String> headerList = Splitter.on(",")
+                .trimResults()
+                .omitEmptyStrings()
+                .splitToList(headers);
+
+        // 遍历头部信息，并获取第一个不为空的IP地址
+        String realIp = headerList.stream()
+                .map(header -> {
+                    String ip = request.getHeader(header);
+                    if ("x-forwarded-for".equalsIgnoreCase(header) && !Strings.isNullOrEmpty(ip)) {
+                        ip = Splitter.on(",")
+                                .trimResults()
+                                .omitEmptyStrings()
+                                .splitToList(ip)
+                                .get(0);
+                    }
+                    return ip;
+                })
+                .filter(ip -> !Strings.isNullOrEmpty(ip) && !"unknown".equalsIgnoreCase(ip))
+                .findFirst()
+                .orElse(request.getRemoteAddr());
+        // 返回获取到的IP地址
+        return realIp;
+    }
+
+
+/*    private String getRealIP(HttpServletRequest request) {
         String ip;
         // 1.基于请求头的x-forwarded-for获取ip
         String ips = request.getHeader("x-forwarded-for");
@@ -69,5 +105,7 @@ public class SmsController {
         }
 
         return ip;
-    }
+    }*/
+
+
 }
