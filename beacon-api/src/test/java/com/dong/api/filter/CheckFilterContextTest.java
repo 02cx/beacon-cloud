@@ -1,6 +1,7 @@
 package com.dong.api.filter;
 
 
+import com.google.common.base.Splitter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,8 @@ public class CheckFilterContextTest {
 
     @Test
     public void check() {
-        Object obj = new Object();
-        checkFilterContext.check(obj);
+        String input = "1233445";
+        String result = Splitter.on(",").trimResults().omitEmptyStrings().splitToList(input).get(0);
+        System.out.println(result);
     }
 }
