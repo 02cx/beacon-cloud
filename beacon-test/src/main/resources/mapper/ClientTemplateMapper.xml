@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.test.mapper.ClientTemplateMapper">
+
+    <resultMap id="BaseResultMap" type="com.dong.test.domain.ClientTemplate">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="signId" column="sign_id" jdbcType="BIGINT"/>
+            <result property="templateText" column="template_text" jdbcType="VARCHAR"/>
+            <result property="templateType" column="template_type" jdbcType="INTEGER"/>
+            <result property="templateState" column="template_state" jdbcType="INTEGER"/>
+            <result property="useId" column="use_id" jdbcType="INTEGER"/>
+            <result property="useWeb" column="use_web" jdbcType="VARCHAR"/>
+            <result property="created" column="created" jdbcType="TIMESTAMP"/>
+            <result property="createId" column="create_id" jdbcType="BIGINT"/>
+            <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
+            <result property="updateId" column="update_id" jdbcType="BIGINT"/>
+            <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
+            <result property="extend1" column="extend1" jdbcType="VARCHAR"/>
+            <result property="extend2" column="extend2" jdbcType="VARCHAR"/>
+            <result property="extend3" column="extend3" jdbcType="VARCHAR"/>
+            <result property="extend4" column="extend4" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,sign_id,template_text,
+        template_type,template_state,use_id,
+        use_web,created,create_id,
+        updated,update_id,is_delete,
+        extend1,extend2,extend3,
+        extend4
+    </sql>
+</mapper>
