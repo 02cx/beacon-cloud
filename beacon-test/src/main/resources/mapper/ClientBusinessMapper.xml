@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.test.mapper.ClientBusinessMapper">
+
+    <resultMap id="BaseResultMap" type="com.dong.test.domain.ClientBusiness">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="corpname" column="corpname" jdbcType="VARCHAR"/>
+            <result property="apikey" column="apikey" jdbcType="VARCHAR"/>
+            <result property="ipAddress" column="ip_address" jdbcType="VARCHAR"/>
+            <result property="isCallback" column="is_callback" jdbcType="TINYINT"/>
+            <result property="callbackUrl" column="callback_url" jdbcType="VARCHAR"/>
+            <result property="clientLinkname" column="client_linkname" jdbcType="VARCHAR"/>
+            <result property="clientPhone" column="client_phone" jdbcType="VARCHAR"/>
+            <result property="clientFilters" column="client_filters" jdbcType="VARCHAR"/>
+            <result property="created" column="created" jdbcType="TIMESTAMP"/>
+            <result property="createId" column="create_id" jdbcType="BIGINT"/>
+            <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
+            <result property="updateId" column="update_id" jdbcType="BIGINT"/>
+            <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
+            <result property="extend1" column="extend1" jdbcType="VARCHAR"/>
+            <result property="extend2" column="extend2" jdbcType="VARCHAR"/>
+            <result property="extend3" column="extend3" jdbcType="VARCHAR"/>
+            <result property="extend4" column="extend4" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,corpname,apikey,
+        ip_address,is_callback,callback_url,
+        client_linkname,client_phone,client_filters,
+        created,create_id,updated,
+        update_id,is_delete,extend1,
+        extend2,extend3,extend4
+    </sql>
+</mapper>
