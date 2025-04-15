@@ -43,5 +43,6 @@ public class ClientBusinessMapperTest {
         log.info("map:{}", map);
         cacheClient.hmset("client_business:" + clientBusiness.getApikey(), map);
     }
+    
 
 }
