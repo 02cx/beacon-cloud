@@ -33,6 +33,16 @@ public class StandardSubmit {
     private String ip;
 
     /**
+     * 客户端真实ip
+     */
+    private String realIp;
+
+    /**
+     * 客户端apiKey
+     */
+    private String apiKey;
+
+    /**
      * 客户业务内的uid
      */
     private String uid;
@@ -87,6 +97,11 @@ public class StandardSubmit {
      * 通道的id信息
      */
     private Long channelId;
+
+    /**
+     * 短信的发送类型， 0-验证码短信，1-通知类短信，2-营销类短信
+     */
+    private int state;
 
     /**
      * 短信的发送状态， 0-等待ing，1-成功，2-失败

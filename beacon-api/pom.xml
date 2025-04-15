@@ -18,6 +18,14 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.dong</groupId>
+            <artifactId>beacon-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
         <!--        web项目-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -83,6 +91,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+
 
 
     </dependencies>

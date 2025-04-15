@@ -3,6 +3,7 @@ package com.dong.api.controller;
 import com.dong.api.form.SingleSendForm;
 import com.dong.api.util.R;
 import com.dong.api.vo.ResultVO;
+import com.dong.common.model.StandardSubmit;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
@@ -36,8 +37,17 @@ public class SmsController {
 
     @PostMapping(value = "/single_send", produces = "application/json;charset=utf-8")
     public ResultVO singleSend(@RequestBody @Validated SingleSendForm singleSendForm, HttpServletRequest request) {
-        log.info("singleSendForm:{}", singleSendForm);
-        String ip = getRealIP(request);
+        // 获取客户端的真实IP
+        String realIP = getRealIP(request);
+        // 构建StandardSubmit，各种封装校验
+        StandardSubmit ssf = new StandardSubmit();
+        ssf.setRealIp(realIP);
+        ssf.setApiKey(singleSendForm.getApikey());
+        ssf.setMobile(singleSendForm.getMobile());
+        ssf.setText(singleSendForm.getText());
+        ssf.setState(singleSendForm.getState());
+        ssf.setUid(singleSendForm.getUid());
+
         return R.ok();
     }
 
