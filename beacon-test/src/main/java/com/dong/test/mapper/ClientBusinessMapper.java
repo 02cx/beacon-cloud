@@ -11,6 +11,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface ClientBusinessMapper extends BaseMapper<ClientBusiness> {
 
+    /**
+     * 根据clientId查询客户信息
+     * @param clientId
+     * @return
+     */
+    ClientBusiness selectByClientId(Long clientId);
 }
 
 

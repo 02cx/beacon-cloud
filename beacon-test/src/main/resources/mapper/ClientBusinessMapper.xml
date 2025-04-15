@@ -33,4 +33,11 @@
         update_id,is_delete,extend1,
         extend2,extend3,extend4
     </sql>
+    <select id="selectByClientId" resultType="com.dong.test.domain.ClientBusiness">
+        select
+        <include refid="Base_Column_List"/>
+        from client_business
+        where is_delete = 0
+        and id = #{clientId}
+    </select>
 </mapper>
