@@ -20,6 +20,6 @@ public class TestController {
     @GetMapping("/api/test")
     public void testCheckf(){
         System.out.println("==================================");
-        checkFilterContext.check(new Object());
+        checkFilterContext.check(null);
     }
 }

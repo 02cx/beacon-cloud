@@ -1,4 +1,4 @@
-package com.dong.api.enums;
+package com.dong.common.enums;
 
 import lombok.Getter;
 

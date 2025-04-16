@@ -1,5 +1,6 @@
 package com.dong.api.filter;
 
+import com.dong.common.model.StandardSubmit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,13 +31,14 @@ public class CheckFilterContext {
 
     /**
      *  将object中的内容 按配置的校验顺序依次校验
-     * @param obj
+     * @param
      */
-    public void check(Object obj) {
+    public void check(StandardSubmit standardSubmit) {
        // 将配置的内容按“，”拆分
         String[] filterNames = filters.split(",");
+        log.info("【校验顺序】 = {}", filterNames.toString());
         Arrays.stream(filterNames).forEach(filter -> {
-            checkFiltersMap.get(filter).check(obj);
+            checkFiltersMap.get(filter).check(standardSubmit);
         });
     }
 }

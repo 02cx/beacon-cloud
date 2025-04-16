@@ -1,7 +1,7 @@
 package com.dong.api.util;
 
-import com.dong.api.enums.SmsCodeEnum;
 import com.dong.api.vo.ResultVO;
+import com.dong.common.enums.SmsCodeEnum;
 
 import java.util.List;
 
@@ -27,6 +27,7 @@ public class R {
         resultVO.setMsg(msg);
         return resultVO;
     }
+
 
     public static ResultVO failure(SmsCodeEnum smsCodeEnum, List<Object> list) {
         ResultVO resultVO = new ResultVO();

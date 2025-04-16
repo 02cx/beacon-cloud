@@ -1,8 +1,9 @@
 package com.dong.api.handler;
 
-import com.dong.api.enums.SmsCodeEnum;
 import com.dong.api.util.R;
 import com.dong.api.vo.ResultVO;
+import com.dong.common.enums.SmsCodeEnum;
+import com.dong.common.exception.ApiKeyException;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.springframework.validation.BindingResult;
@@ -59,6 +60,16 @@ public class GlobalExceptionHandler {
             errorList.add(msg);
         }
         return R.failure(SmsCodeEnum.PARAMETER_ERROR, errorList);
+    }
+
+    /**
+     * 处理ApiKeyException异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = ApiKeyException.class)
+    public ResultVO exception(ApiKeyException e) {
+       return R.failure(e.getCode(), e.getMessage());
     }
 
 

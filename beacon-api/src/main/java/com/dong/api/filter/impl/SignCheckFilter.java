@@ -1,6 +1,7 @@
 package com.dong.api.filter.impl;
 
 import com.dong.api.filter.CheckFilter;
+import com.dong.common.model.StandardSubmit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -10,12 +11,12 @@ import org.springframework.stereotype.Component;
  * @author wuyadong
  * @date 2025/4/5 下午10:51
  */
-@Component("signal")
+@Component("sign")
 @Slf4j
-public class SignalCheckFilter implements CheckFilter {
+public class SignCheckFilter implements CheckFilter {
 
     @Override
-    public void check(Object obj) {
+    public void check(StandardSubmit standardSubmit) {
         log.info("---->短信的签名校验");
     }
 }

@@ -1,5 +1,6 @@
 package com.dong.api.controller;
 
+import com.dong.api.filter.CheckFilterContext;
 import com.dong.api.form.SingleSendForm;
 import com.dong.api.util.R;
 import com.dong.api.vo.ResultVO;
@@ -7,6 +8,7 @@ import com.dong.common.model.StandardSubmit;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
@@ -34,6 +36,9 @@ public class SmsController {
     @Value("${headers}")
     private String headers;
 
+    @Autowired
+    private CheckFilterContext checkFilterContext;
+
 
     @PostMapping(value = "/single_send", produces = "application/json;charset=utf-8")
     public ResultVO singleSend(@RequestBody @Validated SingleSendForm singleSendForm, HttpServletRequest request) {
@@ -47,6 +52,8 @@ public class SmsController {
         ssf.setText(singleSendForm.getText());
         ssf.setState(singleSendForm.getState());
         ssf.setUid(singleSendForm.getUid());
+        // 校验对应数据
+        checkFilterContext.check(ssf);
 
         return R.ok();
     }

@@ -1,5 +1,7 @@
 package com.dong.api.filter;
 
+import com.dong.common.model.StandardSubmit;
+
 /**
  * 类描述： 单条短信接口模块的校验项
  *
@@ -10,7 +12,6 @@ public interface CheckFilter {
 
     /**
      * 校验
-     * @param obj
      */
-    void check(Object obj);
+    void check(StandardSubmit standardSubmit);
 }

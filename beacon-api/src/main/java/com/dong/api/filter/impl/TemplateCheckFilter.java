@@ -1,6 +1,7 @@
 package com.dong.api.filter.impl;
 
 import com.dong.api.filter.CheckFilter;
+import com.dong.common.model.StandardSubmit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class TemplateCheckFilter implements CheckFilter {
 
     @Override
-    public void check(Object obj) {
+    public void check(StandardSubmit standardSubmit) {
         log.info("---->短信的模板校验");
     }
 }
