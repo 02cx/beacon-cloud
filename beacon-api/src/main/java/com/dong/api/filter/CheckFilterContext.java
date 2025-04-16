@@ -36,7 +36,7 @@ public class CheckFilterContext {
     public void check(StandardSubmit standardSubmit) {
        // 将配置的内容按“，”拆分
         String[] filterNames = filters.split(",");
-        log.info("【校验顺序】 = {}", filterNames.toString());
+        log.info("【校验顺序】 = {}", filters);
         Arrays.stream(filterNames).forEach(filter -> {
             checkFiltersMap.get(filter).check(standardSubmit);
         });

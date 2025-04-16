@@ -10,16 +10,16 @@ import lombok.Getter;
  * @date 2025/4/16 下午4:00
  */
 @Getter
-public class ApiKeyException extends RuntimeException{
+public class ApiException extends RuntimeException{
 
     public int code;
 
-    public ApiKeyException(String message, int code) {
+    public ApiException(String message, int code) {
         super(message);
         this.code = code;
     }
 
-    public ApiKeyException(ExceptionEnums exceptionEnums){
+    public ApiException(ExceptionEnums exceptionEnums){
         super(exceptionEnums.getMsg());
         this.code = exceptionEnums.getCode();
     }

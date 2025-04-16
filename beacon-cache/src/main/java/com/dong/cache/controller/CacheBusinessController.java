@@ -46,5 +46,4 @@ public class CacheBusinessController {
         log.info("【缓存模块】 hgetall方法，存储key = {}，存储value = {}",key,stringObjectMap);
         return stringObjectMap;
     }
-
 }

@@ -4,7 +4,7 @@ import com.dong.api.client.BeaconCacheClient;
 import com.dong.api.filter.CheckFilter;
 import com.dong.common.constant.CacheKeyConstant;
 import com.dong.common.enums.ExceptionEnums;
-import com.dong.common.exception.ApiKeyException;
+import com.dong.common.exception.ApiException;
 import com.dong.common.model.StandardSubmit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class ApiKeyCheckFilter implements CheckFilter {
         log.info("【OpenFeign调用】 apiKey = {}", standardSubmit.getApiKey());
         if (map == null || map.isEmpty()) {
             log.error("【apiKey校验】 apiKey = {} 不存在", standardSubmit.getApiKey());
-            throw new ApiKeyException(ExceptionEnums.ERROR_APIKEY);
+            throw new ApiException(ExceptionEnums.ERROR_APIKEY);
         }
 
         // 正常封装数据
