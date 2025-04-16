@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 类描述：缓存模块的FeignClient
@@ -17,4 +18,7 @@ public interface BeaconCacheClient {
 
     @GetMapping("/cache/hgetall/{key}")
     public Map<String, Object> hgetall(@PathVariable(value = "key")String key);
+
+    @GetMapping("/cache/sign/smembers/{key}")
+    public Set<Map> smembers(@PathVariable(value = "key")String key);
 }

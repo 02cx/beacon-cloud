@@ -35,7 +35,7 @@ public class ApiKeyCheckFilter implements CheckFilter {
         }
 
         // 正常封装数据
-        standardSubmit.setClientId((Long) map.get("clientId"));
+        standardSubmit.setClientId(Long.parseLong(map.get("id") + ""));
         log.info("【apiKey校验成功】 apiKey = {} 存在", standardSubmit.getApiKey());
 
     }
