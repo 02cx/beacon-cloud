@@ -21,4 +21,7 @@ public interface BeaconCacheClient {
 
     @GetMapping("/cache/sign/smembers/{key}")
     public Set<Map> smembers(@PathVariable(value = "key")String key);
+
+    @GetMapping("/cache/template/smembers/{key}")
+    public Set<Map> smembersTemplate(@PathVariable(value = "key")String key);
 }

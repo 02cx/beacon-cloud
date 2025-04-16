@@ -58,6 +58,11 @@ public class StandardSubmit {
     private String sign;
 
     /**
+     * 签名ID
+     */
+    private Long signId;
+
+    /**
      * 短信内容
      */
     private String text;

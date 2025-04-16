@@ -52,6 +52,8 @@ public class SignCheckFilter implements CheckFilter {
         // 比对客户提交的签名与缓存中的签名是否一致
         for(Map member : smembers){
             if(sign.equals(member.get("signInfo"))){
+                standardSubmit.setSign(sign);
+                standardSubmit.setSignId(Long.parseLong(member.get("id").toString()));
                 log.info("【签名校验】 签名 = {} 存在", sign);
                 return;
             }
