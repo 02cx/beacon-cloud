@@ -9,6 +9,8 @@ import com.dong.common.util.SnowflakeIdGenerator;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -40,6 +42,9 @@ public class SmsController {
     @Autowired
     private CheckFilterContext checkFilterContext;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
 
     @PostMapping(value = "/single_send", produces = "application/json;charset=utf-8")
     public ResultVO singleSend(@RequestBody @Validated SingleSendForm singleSendForm, HttpServletRequest request) {
@@ -59,6 +64,9 @@ public class SmsController {
         // 基于雪花算法生成唯一id，并添加到StandardSubmit对象中
         ssf.setSequenceId(SnowflakeIdGenerator.getInstance(1, 1).nextId());
         log.info("【请求参数】 {}", ssf);
+
+        //=========================发送到MQ，交给策略模块处理=========================================
+        rabbitTemplate.convertAndSend("sms_pre_send_topic",ssf,new CorrelationData(ssf.getSequenceId().toString()));
 
         return R.ok();
     }

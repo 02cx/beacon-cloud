@@ -3,3 +3,12 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.183.130:8848
+  rabbitmq:
+      host: 192.168.183.130
+      port: 15672
+      username: root
+      password: wuyadong
+      virtual-host: /
+      # 开启confirm机制&return机制
+      publisher-confirm-type: correlated
+      publisher-returns: true
