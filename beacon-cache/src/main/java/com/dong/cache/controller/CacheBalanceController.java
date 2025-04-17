@@ -1,11 +1,11 @@
 package com.dong.cache.controller;
 
+import com.dong.cache.domain.ClientBalance;
 import com.msb.framework.redis.RedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * 类描述：
@@ -19,8 +19,9 @@ public class CacheBalanceController {
     @Autowired
     private RedisClient redisClient;
 
+
     @PostMapping("/cache/balance/set/{key}")
-    public void setBalance(@PathVariable String key, @RequestParam("value")String value){
-        redisClient.set(key,value);
+    public void setBalance(@PathVariable String key, @RequestBody Map<String,Object> clientBalance){
+        redisClient.hSet(key,clientBalance);
     }
 }

@@ -35,5 +35,5 @@ public interface CacheClient {
     public void saddTemplateList(@PathVariable(value = "key")String key, @RequestBody List<ClientTemplate> value);
 
     @PostMapping("/cache/balance/set/{key}")
-    public void setBalance(@PathVariable String key, @RequestParam("value")String value);
+    public void setBalance(@PathVariable String key, @RequestBody Map<String,Object> clientBalance);
 }
