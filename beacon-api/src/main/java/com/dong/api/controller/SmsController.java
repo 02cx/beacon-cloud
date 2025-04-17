@@ -5,6 +5,7 @@ import com.dong.api.form.SingleSendForm;
 import com.dong.api.util.R;
 import com.dong.api.vo.ResultVO;
 import com.dong.common.model.StandardSubmit;
+import com.dong.common.util.SnowflakeIdGenerator;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
@@ -52,8 +53,12 @@ public class SmsController {
         ssf.setText(singleSendForm.getText());
         ssf.setState(singleSendForm.getState());
         ssf.setUid(singleSendForm.getUid());
-        // 校验对应数据
+        // 调用策略模式的校验链
         checkFilterContext.check(ssf);
+
+        // 基于雪花算法生成唯一id，并添加到StandardSubmit对象中
+        ssf.setSequenceId(SnowflakeIdGenerator.getInstance(1, 1).nextId());
+        log.info("【请求参数】 {}", ssf);
 
         return R.ok();
     }
