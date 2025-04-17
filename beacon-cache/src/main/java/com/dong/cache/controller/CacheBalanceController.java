@@ -1,7 +1,7 @@
 package com.dong.cache.controller;
 
-import com.dong.cache.domain.ClientBalance;
 import com.msb.framework.redis.RedisClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +14,7 @@ import java.util.Map;
  * @date 2025/4/15 下午9:17
  */
 @RestController
+@Slf4j
 public class CacheBalanceController {
 
     @Autowired
@@ -21,7 +22,15 @@ public class CacheBalanceController {
 
 
     @PostMapping("/cache/balance/set/{key}")
-    public void setBalance(@PathVariable String key, @RequestBody Map<String,Object> clientBalance){
-        redisClient.hSet(key,clientBalance);
+    public void setBalance(@PathVariable String key, @RequestBody Map<String, Object> clientBalance) {
+        redisClient.hSet(key, clientBalance);
+    }
+
+    @GetMapping("/cache/balancce/hget/{key}")
+    public Long hget(@PathVariable String key, @RequestParam String field) {
+        log.info(String.valueOf(redisClient.<Long>hGet(key, field)));
+        Integer balacne =  redisClient.hGet(key, field);
+        log.info("【缓存模块】客户{}的余额：{}", key, balacne);
+        return balacne.longValue();
     }
 }
