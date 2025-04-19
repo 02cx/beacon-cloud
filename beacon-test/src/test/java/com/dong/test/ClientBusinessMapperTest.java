@@ -36,13 +36,13 @@ public class ClientBusinessMapperTest {
      */
     @Test
     public void testSelectByClientId() {
-        ClientBusiness clientBusiness = clientBusinessMapper.selectByClientId(1L);
+        ClientBusiness clientBusiness = clientBusinessMapper.selectByClientId(2L);
         ObjectMapper objectMapper = new ObjectMapper();
         // 单步完成对象到 Map 的转换
         Map<String, Object> map = objectMapper.convertValue(clientBusiness, new  TypeReference<Map<String, Object>>() {});
         log.info("map:{}", map);
         cacheClient.hmset("client_business:" + clientBusiness.getApikey(), map);
     }
-    
+
 
 }

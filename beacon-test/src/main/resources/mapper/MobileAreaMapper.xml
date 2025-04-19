@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.test.mapper.MobileAreaMapper">
+
+    <resultMap id="BaseResultMap" type="com.dong.test.domain.MobileArea">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="mobileNumber" column="mobile_number" jdbcType="VARCHAR"/>
+            <result property="mobileArea" column="mobile_area" jdbcType="VARCHAR"/>
+            <result property="mobileType" column="mobile_type" jdbcType="VARCHAR"/>
+            <result property="areaCode" column="area_code" jdbcType="VARCHAR"/>
+            <result property="postCode" column="post_code" jdbcType="VARCHAR"/>
+            <result property="provinceCode" column="province_code" jdbcType="VARCHAR"/>
+            <result property="created" column="created" jdbcType="TIMESTAMP"/>
+            <result property="createId" column="create_id" jdbcType="BIGINT"/>
+            <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
+            <result property="updateId" column="update_id" jdbcType="BIGINT"/>
+            <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
+            <result property="extend1" column="extend1" jdbcType="VARCHAR"/>
+            <result property="extend2" column="extend2" jdbcType="VARCHAR"/>
+            <result property="extend3" column="extend3" jdbcType="VARCHAR"/>
+            <result property="extend4" column="extend4" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,mobile_number,mobile_area,
+        mobile_type,area_code,post_code,
+        province_code,created,create_id,
+        updated,update_id,is_delete,
+        extend1,extend2,extend3,
+        extend4
+    </sql>
+    <select id="findAll" resultType="com.dong.test.domain.MobileAreaDTO">
+        select id,mobile_number,mobile_area,mobile_type,area_code,post_code,province_code from mobile_area
+    </select>
+</mapper>

@@ -36,4 +36,7 @@ public interface CacheClient {
 
     @PostMapping("/cache/balance/set/{key}")
     public void setBalance(@PathVariable String key, @RequestBody Map<String,Object> clientBalance);
+
+    @PostMapping("/cache/pipeline/string")
+    public void pipelineString(@RequestBody Map<String,String> map);
 }
