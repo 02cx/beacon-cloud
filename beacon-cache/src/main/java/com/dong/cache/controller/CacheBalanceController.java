@@ -36,9 +36,8 @@ public class CacheBalanceController {
 
     @GetMapping("/cache/balance/hgetfilters/{key}/{field}")
     public String hgetFilters(@PathVariable String key, @PathVariable String field) {
-        log.info(String.valueOf(redisClient.<Long>hGet(key, field)));
-        Integer balacne =  redisClient.hGet(key, field);
-        log.info("【缓存模块】客户{}的余额：{}", key, balacne);
-        return String.valueOf(balacne);
+        String filter =  redisClient.hGet(key, field);
+        log.info("【缓存模块】客户{}的动态配置的过滤顺序：{}", key, filter);
+        return String.valueOf(filter);
     }
 }
