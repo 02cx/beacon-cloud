@@ -4,6 +4,7 @@ import com.dong.api.filter.CheckFilterContext;
 import com.dong.api.form.SingleSendForm;
 import com.dong.api.util.R;
 import com.dong.api.vo.ResultVO;
+import com.dong.common.constant.RabbitMQConstant;
 import com.dong.common.model.StandardSubmit;
 import com.dong.common.util.SnowflakeIdGenerator;
 import com.google.common.base.Splitter;
@@ -66,7 +67,7 @@ public class SmsController {
         log.info("【请求参数】 {}", ssf);
 
         //=========================发送到MQ，交给策略模块处理=========================================
-        rabbitTemplate.convertAndSend("sms_pre_send_topic",ssf,new CorrelationData(ssf.getSequenceId().toString()));
+        rabbitTemplate.convertAndSend(RabbitMQConstant.SMS_PRE_SEND,ssf,new CorrelationData(ssf.getSequenceId().toString()));
 
         return R.ok();
     }
