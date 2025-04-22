@@ -16,6 +16,8 @@ public enum ExceptionEnums {
     ERROR_TEMPLATE(-4,"无可用模板"),
     ERROR_MOBILE(-5,"手机号格式不正确"),
     BALANCE_NOT_ENOUGH(-6,"手客户余额不足"),
+    MOBILE_EMPTY(-7,"手机号为空"),
+
     ;
 
 

@@ -15,4 +15,6 @@ public class CacheKeyConstant {
     public static final  String CLIENT_TEMPLATE = "client_template:";
 
     public static final  String CLIENT_BALANCE = "client_balance:";
+
+    public static final  String PHASE = "phase:";
 }

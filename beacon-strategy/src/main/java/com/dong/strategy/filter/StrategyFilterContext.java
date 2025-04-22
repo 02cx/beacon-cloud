@@ -22,24 +22,25 @@ import java.util.Map;
 public class StrategyFilterContext {
 
     @Autowired
-    private Map<String,StrategyFilter> strategyFilterMap;
+    private Map<String, StrategyFilter> strategyFilterMap;
 
     @Autowired
     private BeaconCacheFeign beaconCacheFeign;
 
     /**
      * 过滤责任链
+     *
      * @param standardSubmit
      */
-    public void strategy(StandardSubmit standardSubmit){
+    public void strategy(StandardSubmit standardSubmit) {
         // 基于redis获取客户的动态校验规则
         String clientFilters = beaconCacheFeign.hgetFilters(CacheKeyConstant.CLIENT_BUSINESS + standardSubmit.getApiKey(), "clientFilters");
         List<String> list = Splitter.on(",").trimResults().omitEmptyStrings().splitToList(clientFilters);
-        log.info("客户端动态校验规则：{}",list);
-        if(list != null && !list.isEmpty()){
-            for(String filter : list){
+        log.info("客户端动态校验规则：{}", list);
+        if (list != null && !list.isEmpty()) {
+            for (String filter : list) {
                 StrategyFilter strategyFilter = strategyFilterMap.get(filter);
-                if(strategyFilter != null){
+                if (strategyFilter != null) {
                     strategyFilter.check(standardSubmit);
                 }
             }

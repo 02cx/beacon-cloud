@@ -1,5 +1,6 @@
 package com.dong.cache.controller;
 
+import com.dong.common.domain.MobileAreaDTO;
 import com.msb.framework.redis.RedisClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,12 @@ public class CacheBalanceController {
                 operations.opsForValue().set(entry.getKey(),entry.getValue());
             }
         });
+    }
+
+    @GetMapping("/cache/phase/get/{key}")
+    public MobileAreaDTO getPhase(@PathVariable String key) {
+        MobileAreaDTO mobileAreaDTO = redisClient.get(key);
+        log.info("【缓存模块】获取到手机号码{}的归属地信息：{}", key, mobileAreaDTO);
+        return mobileAreaDTO;
     }
 }
