@@ -1,6 +1,7 @@
 package com.dong.test.feign;
 
 import com.dong.test.domain.ClientTemplate;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,4 +40,7 @@ public interface CacheClient {
 
     @PostMapping("/cache/pipeline/string")
     public void pipelineString(@RequestBody Map<String,String> map);
+
+    @PostMapping("/cache/dirtyword/sadd/{key}")
+    public void sadd(@PathVariable String key,@RequestBody String... values);
 }
