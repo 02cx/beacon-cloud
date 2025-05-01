@@ -1,6 +1,7 @@
 package com.dong.strategy.mq;
 
 import com.dong.common.constant.RabbitMQConstant;
+import com.dong.common.exception.StrategyException;
 import com.dong.common.model.StandardSubmit;
 import com.dong.strategy.filter.StrategyFilterContext;
 import com.rabbitmq.client.Channel;
@@ -27,10 +28,15 @@ public class PreSendListener {
     @RabbitListener(queues = RabbitMQConstant.SMS_PRE_SEND)
     public void preSend(StandardSubmit standardSubmit, Message message, Channel channel) throws IOException {
         log.info("【策略模块】短信接收到的MQ消息，短信 = {}", standardSubmit.toString());
-        // 处理业务
-        strategyFilterContext.strategy(standardSubmit);
+        try{
+            // 处理业务
+            strategyFilterContext.strategy(standardSubmit);
 
-        // 手动确认消息
-        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+            // 手动确认消息
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+        }catch (StrategyException e){
+            log.error("【策略模块】短信处理失败，短信 = {},异常信息 = {}", standardSubmit.toString(), e.getMessage());
+            channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
+        }
     }
 }

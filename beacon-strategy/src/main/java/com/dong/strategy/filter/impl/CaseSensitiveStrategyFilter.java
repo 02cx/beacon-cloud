@@ -2,6 +2,7 @@ package com.dong.strategy.filter.impl;
 
 import com.dong.common.enums.ExceptionEnums;
 import com.dong.common.exception.DirtyWordException;
+import com.dong.common.exception.StrategyException;
 import com.dong.common.model.StandardSubmit;
 import com.dong.strategy.filter.StrategyFilter;
 import com.dong.strategy.util.HutoolDFAUtil;
@@ -31,7 +32,7 @@ public class CaseSensitiveStrategyFilter implements StrategyFilter {
 
         if (dirtyWords != null && dirtyWords.size() > 0) {
             // 存在敏感词 抛出异常/其他处理
-            throw new DirtyWordException(ExceptionEnums.DIRTWORD_EXIST);
+            throw new StrategyException(ExceptionEnums.DIRTWORD_EXIST);
         }
     }
 }
