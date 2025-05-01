@@ -5,6 +5,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Set;
+
 /**
  * 类描述：
  *
@@ -18,4 +20,7 @@ public interface BeaconCacheFeign {
 
     @GetMapping("/cache/phase/get/{key}")
     public MobileAreaDTO getPhase(@PathVariable String key);
+
+    @GetMapping("/cache/dirtyword/smembers/{key}")
+    public Set<String> smembers(@PathVariable String key);
 }

@@ -2,10 +2,9 @@ package com.dong.cache.controller;
 
 import com.msb.framework.redis.RedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 /**
  * 类描述：
@@ -23,5 +22,10 @@ public class CacheDirtywordController {
     @PostMapping("/cache/dirtyword/sadd/{key}")
     public void sadd(@PathVariable String key,@RequestBody String... values){
         redisClient.sAdd(key,values);
+    }
+
+    @GetMapping("/cache/dirtyword/smembers/{key}")
+    public Set<String> smembers(@PathVariable String key){
+        return redisClient.sMembers(key);
     }
 }
