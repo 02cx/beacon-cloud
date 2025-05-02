@@ -1,5 +1,6 @@
 package com.dong.api.config;
 
+import com.dong.common.constant.RabbitMQConstant;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,15 @@ public class RabbitMQConfig {
     @Bean
     public Queue preSendQueue(){
         return QueueBuilder.durable( "sms_pre_send_topic").build();
+    }
+
+    /**
+     * 写日志的队列。
+     * @return
+     */
+    @Bean
+    public Queue writeLogQueue(){
+        return QueueBuilder.durable(RabbitMQConstant.SMS_WRITE_LOG).build();
     }
 
 }

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -67,6 +68,7 @@ public class SmsController {
         log.info("【请求参数】 {}", ssf);
 
         //=========================发送到MQ，交给策略模块处理=========================================
+        ssf.setSendTime(LocalDateTime.now());
         rabbitTemplate.convertAndSend(RabbitMQConstant.SMS_PRE_SEND,ssf,new CorrelationData(ssf.getSequenceId().toString()));
 
         return R.ok();

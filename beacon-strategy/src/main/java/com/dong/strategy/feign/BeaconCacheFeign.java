@@ -23,4 +23,14 @@ public interface BeaconCacheFeign {
 
     @GetMapping("/cache/dirtyword/smembers/{key}")
     public Set<String> smembers(@PathVariable String key);
+
+
+    @GetMapping("/cache/hget/isCallback/{key}/{field}")
+    public Integer hgetIsCallback(@PathVariable(value = "key") String key, @PathVariable(value = "field") String field);
+
+    @GetMapping("/cache/hget/callbackUrl/{key}/{field}")
+    public String hgetCallbackUrl(@PathVariable(value = "key")String key, @PathVariable(value = "field")String field);
+
+
+
 }

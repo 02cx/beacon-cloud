@@ -46,4 +46,29 @@ public class CacheBusinessController {
         log.info("【缓存模块】 hgetall方法，存储key = {}，存储value = {}",key,stringObjectMap);
         return stringObjectMap;
     }
+
+    /**
+     * 获取isCallback  是否回调
+     * @param key
+     * @param field
+     * @return
+     */
+    @GetMapping("/cache/hget/isCallback/{key}/{field}")
+    public Integer hgetIsCallback(@PathVariable(value = "key")String key, @PathVariable(value = "field")String field){
+        Integer value = redisClient.hGet(key, field);
+        return value;
+    }
+
+
+    /**
+     * 获取callbackUrl 回调地址
+     * @param key
+     * @param field
+     * @return
+     */
+    @GetMapping("/cache/hget/callbackUrl/{key}/{field}")
+    public String hgetCallbackUrl(@PathVariable(value = "key")String key, @PathVariable(value = "field")String field){
+        String value = redisClient.hGet(key, field);
+        return value;
+    }
 }

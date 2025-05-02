@@ -114,6 +114,12 @@ public class StandardSubmit implements Serializable {
      */
     private int reportState;
 
+    /**
+     * 短信的回执信息
+     */
+    private String reportErrorMsg;
+
+
     // 后续再做封装~~~~
 
 }
