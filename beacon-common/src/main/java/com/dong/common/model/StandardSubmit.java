@@ -119,6 +119,11 @@ public class StandardSubmit implements Serializable {
      */
     private String reportErrorMsg;
 
+    /***
+     * 是否携号转网
+     */
+    private Boolean isTransfer;
+
 
     // 后续再做封装~~~~
 

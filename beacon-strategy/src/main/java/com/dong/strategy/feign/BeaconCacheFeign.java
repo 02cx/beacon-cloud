@@ -32,5 +32,9 @@ public interface BeaconCacheFeign {
     public String hgetCallbackUrl(@PathVariable(value = "key")String key, @PathVariable(value = "field")String field);
 
 
+    @GetMapping("/cache/black/get/{key}")
+    public String getBlack(@PathVariable String key);
+
+
 
 }

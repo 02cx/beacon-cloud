@@ -18,6 +18,8 @@ public enum ExceptionEnums {
     BALANCE_NOT_ENOUGH(-6,"手客户余额不足"),
     MOBILE_EMPTY(-7,"手机号为空"),
     DIRTWORD_EXIST(-8,"包含敏感词"),
+    BLACK_GLOBAL(-9,"当前手机号属于全局黑名单"),
+    BLACK_CLIENT(-10,"当前手机号属于客户黑名单"),
     ;
 
 

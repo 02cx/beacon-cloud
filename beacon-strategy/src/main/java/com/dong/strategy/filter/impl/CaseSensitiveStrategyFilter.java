@@ -52,7 +52,8 @@ public class CaseSensitiveStrategyFilter implements StrategyFilter {
         if (dirtyWords != null && dirtyWords.size() > 0) {
             // 存在敏感词 抛出异常/其他处理
             // 发送消息到写日志队列
-            errorSendMsgUtil.sendWriteLog(standardSubmit,dirtyWords);
+            standardSubmit.setReportErrorMsg(ExceptionEnums.DIRTWORD_EXIST.getMsg() + "dirtyWords = " + dirtyWords.toString());
+            errorSendMsgUtil.sendWriteLog(standardSubmit);
 
             // 发送状态报告的消息前，需要将report对象数据封装
             errorSendMsgUtil.sendPushReport(standardSubmit);
