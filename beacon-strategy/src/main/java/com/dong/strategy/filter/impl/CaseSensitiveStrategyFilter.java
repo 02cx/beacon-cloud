@@ -8,6 +8,7 @@ import com.dong.common.model.StandardReport;
 import com.dong.common.model.StandardSubmit;
 import com.dong.strategy.feign.BeaconCacheFeign;
 import com.dong.strategy.filter.StrategyFilter;
+import com.dong.strategy.util.ErrorSendMsgUtil;
 import com.dong.strategy.util.HutoolDFAUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
@@ -31,6 +32,9 @@ public class CaseSensitiveStrategyFilter implements StrategyFilter {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    @Autowired
+    private ErrorSendMsgUtil errorSendMsgUtil;
+
 
     @Autowired
     private BeaconCacheFeign beaconCacheFeign;
@@ -47,28 +51,11 @@ public class CaseSensitiveStrategyFilter implements StrategyFilter {
 
         if (dirtyWords != null && dirtyWords.size() > 0) {
             // 存在敏感词 抛出异常/其他处理
-            // 封装错误信息
-            standardSubmit.setReportErrorMsg(ExceptionEnums.DIRTWORD_EXIST.getMsg() + "dirtywords:" + dirtyWords);
-            standardSubmit.setReportState(2);
             // 发送消息到写日志队列
-            rabbitTemplate.convertAndSend(RabbitMQConstant.SMS_WRITE_LOG, standardSubmit);
+            errorSendMsgUtil.sendWriteLog(standardSubmit,dirtyWords);
 
             // 发送状态报告的消息前，需要将report对象数据封装
-            Integer isCallback = beaconCacheFeign.hgetIsCallback(CacheKeyConstant.CLIENT_BUSINESS + standardSubmit.getApiKey(), "isCallback");
-            // 客户需要回调
-            if(isCallback == 1){
-                String callbackUrl = beaconCacheFeign.hgetCallbackUrl(CacheKeyConstant.CLIENT_BUSINESS + standardSubmit.getApiKey(), "callbackUrl");
-                // 回调地址不为空
-                if(!Strings.isEmpty(callbackUrl)){
-                    // 封装客户的报告推送的信息
-                    StandardReport standardReport = new StandardReport();
-                    BeanUtils.copyProperties(standardSubmit, standardReport);
-                    standardReport.setCallbackUrl(callbackUrl);
-                    standardReport.setIsCallback(isCallback);
-                    // 发送消息到RabbitMQ
-                    rabbitTemplate.convertAndSend(RabbitMQConstant.SMS_PUSH_REPORT, standardReport);
-                }
-            }
+            errorSendMsgUtil.sendPushReport(standardSubmit);
 
             // 抛出异常
             throw new StrategyException(ExceptionEnums.DIRTWORD_EXIST);
