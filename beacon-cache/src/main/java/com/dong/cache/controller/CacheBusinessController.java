@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 类描述：
@@ -71,4 +72,27 @@ public class CacheBusinessController {
         String value = redisClient.hGet(key, field);
         return value;
     }
+
+
+    @PostMapping("/cache/ratelimiter/zadd/{key}/{score}/{member}")
+    public Boolean zadd(@PathVariable(value = "key")String key, @PathVariable(value = "score")Long score, @PathVariable(value = "member")String member){
+        log.info("【缓存模块】 zadd方法，存储key = {}，存储value = {}",key,member);
+        boolean res = redisClient.zAdd(key, member, score);
+        return res;
+    }
+
+    @GetMapping("/cache/ratelimiter/zrange/{key}/{start}/{end}")
+    public Integer zrangeByScore(@PathVariable(value =  "key") String key,@PathVariable(value = "start") Double start, @PathVariable(value = "end") Double end){
+        Set<Object> values = redisClient.zRangeByScore(key, start, end);
+        if(values != null){
+            return values.size();
+        }
+        return 0;
+    }
+
+    @PostMapping("/cache/ratelimiter/zremove/{key}/{member}")
+    public void zRemove(@PathVariable(value = "key")String key, @PathVariable(value = "member")String member){
+        redisClient.zRemove(key, member);
+    }
+
 }
