@@ -24,5 +24,7 @@ public class CacheKeyConstant {
 
     public static final  String ROUTE_LIMITER_ONE_MINUS = "limit:minutes:";
 
+    public static final  String ROUTE_LIMITER_ONE_HOURS = "limit:hours:";
+
 
 }
