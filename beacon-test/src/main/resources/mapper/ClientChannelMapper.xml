@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.test.mapper.ClientChannelMapper">
+
+    <resultMap id="BaseResultMap" type="com.dong.test.domain.ClientChannel">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="clientId" column="client_id" jdbcType="BIGINT"/>
+            <result property="channelId" column="channel_id" jdbcType="BIGINT"/>
+            <result property="clientChannelWeight" column="client_channel_weight" jdbcType="INTEGER"/>
+            <result property="clientChannelPrice" column="client_channel_price" jdbcType="BIGINT"/>
+            <result property="clientChannelNumber" column="client_channel_number" jdbcType="VARCHAR"/>
+            <result property="isAvailable" column="is_available" jdbcType="TINYINT"/>
+            <result property="created" column="created" jdbcType="TIMESTAMP"/>
+            <result property="createId" column="create_id" jdbcType="BIGINT"/>
+            <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
+            <result property="updateId" column="update_id" jdbcType="BIGINT"/>
+            <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
+            <result property="extend1" column="extend1" jdbcType="VARCHAR"/>
+            <result property="extend2" column="extend2" jdbcType="VARCHAR"/>
+            <result property="extend3" column="extend3" jdbcType="VARCHAR"/>
+            <result property="extend4" column="extend4" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,client_id,channel_id,
+        client_channel_weight,client_channel_price,client_channel_number,
+        is_available,created,create_id,
+        updated,update_id,is_delete,
+        extend1,extend2,extend3,
+        extend4
+    </sql>
+    <select id="getAllClientChannelList" resultType="com.dong.test.domain.ClientChannel">
+        select id,client_id,channel_id,client_channel_weight,client_channel_price,client_channel_number
+        from client_channel
+        where is_delete = 0 and is_available = 0;
+    </select>
+</mapper>

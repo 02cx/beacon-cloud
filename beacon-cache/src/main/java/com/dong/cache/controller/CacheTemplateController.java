@@ -1,5 +1,6 @@
 package com.dong.cache.controller;
 
+import com.dong.cache.domain.Channel;
 import com.dong.cache.domain.ClientTemplate;
 import com.msb.framework.redis.RedisClient;
 import lombok.Getter;
@@ -39,5 +40,16 @@ public class CacheTemplateController {
         return redisClient.sMembers(key);
     }
 
+
+    @PostMapping("/cache/chennal/list/sadd/{key}")
+    public void saddChannelList(@PathVariable(value = "key")String key, @RequestBody List<Channel> value) {
+        redisClient.sAdd(key, value);
+    }
+
+
+    @GetMapping("/cache/channel/get/{key}")
+    public Map getChannel(String key){
+        return redisClient.hGetAll(key);
+    }
 
 }

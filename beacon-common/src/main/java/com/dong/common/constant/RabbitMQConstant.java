@@ -21,4 +21,6 @@ public class RabbitMQConstant {
      * 推送客户的报告信息
      */
     public static final String SMS_PUSH_REPORT = "sms_push_report_topic";
+
+    public static final String SMS_GATEWAY = "sms_gateway_topic_";
 }

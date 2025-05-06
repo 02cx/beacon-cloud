@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.test.mapper.ChannelMapper">
+
+    <resultMap id="BaseResultMap" type="com.dong.test.domain.Channel">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="channelName" column="channel_name" jdbcType="VARCHAR"/>
+            <result property="channelType" column="channel_type" jdbcType="INTEGER"/>
+            <result property="channelArea" column="channel_area" jdbcType="VARCHAR"/>
+            <result property="channelAreaCode" column="channel_area_code" jdbcType="VARCHAR"/>
+            <result property="channelPrice" column="channel_price" jdbcType="BIGINT"/>
+            <result property="channelProtocal" column="channel_protocal" jdbcType="INTEGER"/>
+            <result property="channelIp" column="channel_ip" jdbcType="VARCHAR"/>
+            <result property="channelPort" column="channel_port" jdbcType="INTEGER"/>
+            <result property="channelUsername" column="channel_username" jdbcType="VARCHAR"/>
+            <result property="channelPassword" column="channel_password" jdbcType="VARCHAR"/>
+            <result property="channelNumber" column="channel__number" jdbcType="VARCHAR"/>
+            <result property="isAvailable" column="is_available" jdbcType="TINYINT"/>
+            <result property="created" column="created" jdbcType="TIMESTAMP"/>
+            <result property="createId" column="create_id" jdbcType="BIGINT"/>
+            <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
+            <result property="updateId" column="update_id" jdbcType="BIGINT"/>
+            <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
+            <result property="extend1" column="extend1" jdbcType="VARCHAR"/>
+            <result property="extend2" column="extend2" jdbcType="VARCHAR"/>
+            <result property="extend3" column="extend3" jdbcType="VARCHAR"/>
+            <result property="extend4" column="extend4" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,channel_name,channel_type,
+        channel_area,channel_area_code,channel_price,
+        channel_protocal,channel_ip,channel_port,
+        channel_username,channel_password,channel__number,
+        is_available,created,create_id,
+        updated,update_id,is_delete,
+        extend1,extend2,extend3,
+        extend4
+    </sql>
+    <select id="getAllChannelList" resultType="com.dong.test.domain.Channel">
+        select id,channel_name,channel_type,channel_area,channel_area_code,channel_price,channel_protocal,channel_ip,channel_port,channel_username,channel_password,channel__number
+        from channel
+        where is_delete = 0 and is_available = 1;
+    </select>
+</mapper>

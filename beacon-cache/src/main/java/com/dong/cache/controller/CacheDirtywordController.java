@@ -4,6 +4,7 @@ import com.msb.framework.redis.RedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -26,6 +27,11 @@ public class CacheDirtywordController {
 
     @GetMapping("/cache/dirtyword/smembers/{key}")
     public Set<String> smembers(@PathVariable String key){
+        return redisClient.sMembers(key);
+    }
+
+    @GetMapping("/cache/route/smembers/{key}")
+    public Set<Map> smembersRoute(@PathVariable String key){
         return redisClient.sMembers(key);
     }
 }

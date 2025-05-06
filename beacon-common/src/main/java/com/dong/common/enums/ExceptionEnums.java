@@ -22,6 +22,8 @@ public enum ExceptionEnums {
     BLACK_CLIENT(-10,"当前手机号属于客户黑名单"),
     ONE_MINUS_LIMIT(-11,"一分钟内只能发送一次短信"),
     ONE_HOURS_LIMIT(-12,"一个小时内只能发送三次短信"),
+    NO_CHANNEL(-13,"没有可能的通道信息"),
+    UNKNOWN_ERROR(-20,"未知的错误"),
     ;
 
 

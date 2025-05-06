@@ -81,7 +81,7 @@ public class StandardSubmit implements Serializable {
     /**
      * 目标手机号的运营商
      */
-    private Integer operatorId;
+    private int operatorId;
 
 
     /**

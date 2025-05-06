@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -47,6 +48,12 @@ public interface BeaconCacheFeign {
 
     @PostMapping("/cache/hIncrBy/{key}/{field}/{delta}")
     public Long hIncrBy(@PathVariable String key,@PathVariable String  field, @PathVariable Long delta);
+
+    @GetMapping("/cache/route/smembers/{key}")
+    public Set<Map> smembersRoute(@PathVariable String key);
+
+    @GetMapping("/cache/channel/get/{key}")
+    public Map getChannel(String key);
 
 
 

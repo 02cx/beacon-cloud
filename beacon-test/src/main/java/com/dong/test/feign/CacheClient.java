@@ -1,5 +1,6 @@
 package com.dong.test.feign;
 
+import com.dong.test.domain.Channel;
 import com.dong.test.domain.ClientTemplate;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -43,4 +44,7 @@ public interface CacheClient {
 
     @PostMapping("/cache/dirtyword/sadd/{key}")
     public void sadd(@PathVariable String key,@RequestBody String... values);
+
+    @PostMapping("/cache/chennal/list/sadd/{key}")
+    public void saddChannelList(@PathVariable(value = "key")String key, @RequestBody List<Channel> value);
 }
