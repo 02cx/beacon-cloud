@@ -34,6 +34,11 @@ public class RouteLimiteOneMinusStrategyFilter implements StrategyFilter {
 
     @Override
     public void check(StandardSubmit standardSubmit) {
+        // 判断短信类型不是验证码类的，直接结束方法
+        if(standardSubmit.getState() != 0){
+            return;
+        }
+
         // 获取短信发送时间
         LocalDateTime sendTime = standardSubmit.getSendTime();
         // 转为毫秒数
