@@ -58,4 +58,13 @@ public class CacheBalanceController {
         log.info("【缓存模块】获取到手机号码{}的归属地信息：{}", key, mobileAreaDTO);
         return mobileAreaDTO;
     }
+
+
+    @PostMapping("/cache/hIncrBy/{key}/{field}/{delta}")
+    public Long hIncrBy(@PathVariable String key,@PathVariable String  field, @PathVariable Long delta){
+        log.info("【缓存模块】 hIncrBy方法，存储key = {}，存储field = {}，存储delta = {}",key,field,delta);
+        Long res = redisClient.hIncrementBy(key, field, delta);
+        log.info("【缓存模块】 hIncrBy方法，存储key = {}，存储field = {}，剩余数值 = {}",key,field,res);
+        return res;
+    }
 }

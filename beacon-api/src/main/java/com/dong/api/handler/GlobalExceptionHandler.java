@@ -4,6 +4,7 @@ import com.dong.api.util.R;
 import com.dong.api.vo.ResultVO;
 import com.dong.common.enums.SmsCodeEnum;
 import com.dong.common.exception.ApiException;
+import com.dong.common.exception.StrategyException;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.springframework.validation.BindingResult;
@@ -67,7 +68,7 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(value = ApiException.class)
+    @ExceptionHandler(value={ApiException.class, StrategyException.class})
     public ResultVO exception(ApiException e) {
        return R.failure(e.getCode(), e.getMessage());
     }

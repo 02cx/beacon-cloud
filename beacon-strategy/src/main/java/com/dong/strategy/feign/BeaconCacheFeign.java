@@ -45,6 +45,9 @@ public interface BeaconCacheFeign {
     @PostMapping("/cache/ratelimiter/zremove/{key}/{member}")
     public void zRemove(@PathVariable(value = "key")String key, @PathVariable(value = "member")String member);
 
+    @PostMapping("/cache/hIncrBy/{key}/{field}/{delta}")
+    public Long hIncrBy(@PathVariable String key,@PathVariable String  field, @PathVariable Long delta);
+
 
 
 }
