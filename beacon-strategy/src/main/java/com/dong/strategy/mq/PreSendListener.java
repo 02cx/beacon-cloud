@@ -31,7 +31,6 @@ public class PreSendListener {
         try{
             // 处理业务
             strategyFilterContext.strategy(standardSubmit);
-
             // 手动确认消息
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         }catch (StrategyException e){

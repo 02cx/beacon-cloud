@@ -41,7 +41,7 @@ public class ClientChannelMapperTest {
         for(ClientChannel clientChannel : allClientChannelList){
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> map = objectMapper.convertValue(clientChannel, new  TypeReference<Map<String, Object>>() {});
-            cacheClient.hmset("client_channel:" + clientChannel.getId(),map);
+            cacheClient.sadd("client_channel:" + clientChannel.getClientId(),map);
         }
     }
 }

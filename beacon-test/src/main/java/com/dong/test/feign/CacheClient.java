@@ -47,4 +47,8 @@ public interface CacheClient {
 
     @PostMapping("/cache/chennal/list/sadd/{key}")
     public void saddChannelList(@PathVariable(value = "key")String key, @RequestBody List<Channel> value);
+
+
+    @PostMapping("/cache/list/lpush/{key}")
+    public void lpush(@PathVariable(value = "key")String key, @RequestBody Map<String,Object>... value);
 }

@@ -24,6 +24,7 @@ public enum ExceptionEnums {
     ONE_HOURS_LIMIT(-12,"一个小时内只能发送三次短信"),
     NO_CHANNEL(-13,"没有可能的通道信息"),
     UNKNOWN_ERROR(-20,"未知的错误"),
+    SEARCH_INDEX_ERROR(-21,"索引添加失败异常"),
     ;
 
 

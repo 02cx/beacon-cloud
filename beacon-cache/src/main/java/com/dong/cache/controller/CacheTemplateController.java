@@ -30,6 +30,8 @@ public class CacheTemplateController {
         redisClient.sAdd(key, value);
     }
 
+
+
     @PostMapping("/cache/template/list/sadd/{key}")
     public void saddTemplateList(@PathVariable(value = "key")String key, @RequestBody List<ClientTemplate> value) {
         redisClient.sAdd(key, value);
@@ -50,6 +52,12 @@ public class CacheTemplateController {
     @GetMapping("/cache/channel/get/{key}")
     public Map getChannel(String key){
         return redisClient.hGetAll(key);
+    }
+
+
+    @PostMapping("/cache/list/lpush/{key}")
+    public void lpush(@PathVariable(value = "key")String key, @RequestBody Map<String,Object>... value) {
+        redisClient.lPush(key, value);
     }
 
 }
