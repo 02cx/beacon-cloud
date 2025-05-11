@@ -21,7 +21,7 @@ import java.io.IOException;
 public class SmsGatewayListener {
 
     @RabbitListener(queues = "${gateway.sendtopic}")
-    public void consume(StandardSubmit submit, Channel channel, Message mes) throws IOException {
+    public void consume(String submit, Channel channel, Message mes) throws IOException {
         log.info("【网关模块】短信接收到的MQ消息，短信 = {}", submit);
         // 完成与运营商的交互，发送一次请求，接收两次响应
 
