@@ -43,7 +43,7 @@ public class BlackListClientStrategyFilter implements StrategyFilter {
         //3、如果查询的结果为"1"，代表是黑名单
         if(TRUE.equals(value)){
             log.info("【策略模块-客户级别黑名单校验】   当前发送的手机号是客户黑名单！ mobile = {}",mobile);
-            submit.setReportErrorMsg(ExceptionEnums.BLACK_CLIENT + ",mobile = " + mobile);
+            submit.setReportErrorMsg(ExceptionEnums.BLACK_CLIENT.getMsg() + ",mobile = " + mobile);
             sendMsgUtil.sendWriteLog(submit);
             sendMsgUtil.sendPushReport(submit);
             throw new StrategyException(ExceptionEnums.BLACK_CLIENT);

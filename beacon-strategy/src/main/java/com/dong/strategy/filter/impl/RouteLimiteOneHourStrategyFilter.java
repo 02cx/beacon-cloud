@@ -55,7 +55,7 @@ public class RouteLimiteOneHourStrategyFilter implements StrategyFilter {
         while(!beaconCacheFeign.zadd(key, time, time + "")){
             if(retry++ == 2) {
                 log.info("【策略模块-一小时内发生三次限流器】   当前手机号发送短信请求被限流！失败重试 mobile = {}",mobile);
-                standardSubmit.setReportErrorMsg(ExceptionEnums.ONE_HOURS_LIMIT + ",mobile = " + mobile);
+                standardSubmit.setReportErrorMsg(ExceptionEnums.ONE_HOURS_LIMIT.getMsg() + ",mobile = " + mobile);
                 // 推送状态报告以及日志
                 errorSendMsgUtil.sendPushReport(standardSubmit);
                 errorSendMsgUtil.sendWriteLog(standardSubmit);
@@ -76,7 +76,7 @@ public class RouteLimiteOneHourStrategyFilter implements StrategyFilter {
             // 推送状态报告之前移除本次缓存的数据
             beaconCacheFeign.zRemove(key,String.valueOf(time));
             // 设置状态报告
-            standardSubmit.setReportErrorMsg(ExceptionEnums.ONE_HOURS_LIMIT + ",mobile = " + mobile);
+            standardSubmit.setReportErrorMsg(ExceptionEnums.ONE_HOURS_LIMIT.getMsg() + ",mobile = " + mobile);
             // 推送状态报告以及日志
             errorSendMsgUtil.sendPushReport(standardSubmit);
             errorSendMsgUtil.sendWriteLog(standardSubmit);

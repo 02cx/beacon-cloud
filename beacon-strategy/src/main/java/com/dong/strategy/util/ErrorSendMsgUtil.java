@@ -57,6 +57,7 @@ public class ErrorSendMsgUtil {
                 BeanUtils.copyProperties(submit,report);
                 report.setIsCallback(isCallback);
                 report.setCallbackUrl(callbackUrl);
+                report.setErrorMsg(submit.getReportErrorMsg());
                 // 发送消息到RabbitMQ
                 rabbitTemplate.convertAndSend(RabbitMQConstant.SMS_PUSH_REPORT,report);
             }

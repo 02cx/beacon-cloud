@@ -54,7 +54,7 @@ public class RouteLimiteOneMinusStrategyFilter implements StrategyFilter {
         // 如果添加失败，表示同一时刻还有其他的短信发送请求，因为1分钟内只能发送一次，则直接返回限流
         if(!res){
             log.info("【策略模块-一分钟内只能发送一次限流器】   当前手机号发送短信请求被限流！同一时刻发生并发导致 mobile = {}",mobile);
-            standardSubmit.setReportErrorMsg(ExceptionEnums.ONE_MINUS_LIMIT + ",mobile = " + mobile);
+            standardSubmit.setReportErrorMsg(ExceptionEnums.ONE_MINUS_LIMIT.getMsg() + ",mobile = " + mobile);
             // 推送状态报告以及日志
             errorSendMsgUtil.sendPushReport(standardSubmit);
             errorSendMsgUtil.sendWriteLog(standardSubmit);
@@ -70,7 +70,7 @@ public class RouteLimiteOneMinusStrategyFilter implements StrategyFilter {
             // 推送状态报告之前移除本次缓存的数据
             beaconCacheFeign.zRemove(key,String.valueOf(time));
             // 设置状态报告
-            standardSubmit.setReportErrorMsg(ExceptionEnums.ONE_MINUS_LIMIT + ",mobile = " + mobile);
+            standardSubmit.setReportErrorMsg(ExceptionEnums.ONE_MINUS_LIMIT.getMsg() + ",mobile = " + mobile);
             errorSendMsgUtil.sendPushReport(standardSubmit);
             errorSendMsgUtil.sendWriteLog(standardSubmit);
             throw new StrategyException(ExceptionEnums.ONE_MINUS_LIMIT);
